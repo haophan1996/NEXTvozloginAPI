@@ -12,15 +12,17 @@ api2.post('/api/verification', async (req, res) => {
             console.log(callback['data']);
             if (callback['data'].length == 2) {
                 res.status(200).send({
-                    xf_user: callback['data'][0].split(';')[0].split('=')[1],
-                    date_expire: callback['data'][0].split(';')[1].split(',')[1].trim(),
-                    xf_session: callback['data'][1].split(';')[0].split('=')[1],
+                    cookie: callback['data'][0].split(';')[0] + '; ' + callback['data'][1].split(';')[0] + '; '
+                    // xf_user: callback['data'][0].split(';')[0].split('=')[1],
+                    // date_expire: callback['data'][0].split(';')[1].split(',')[1].trim(),
+                    // xf_session: callback['data'][1].split(';')[0].split('=')[1],
                 });
             } else if (callback['data'].length == 3) {
                 res.status(200).send({
-                    xf_user: callback['data'][1].split(';')[0].split('=')[1],
-                    date_expire: callback['data'][1].split(';')[1].split(',')[1].trim(),
-                    xf_session: callback['data'][2].split(';')[0].split('=')[1],
+                    cookie: callback['data'][0].split(';')[0] + '; ' + callback['data'][1].split(';')[0] + '; ' + callback['data'][2].split(';')[0] + ';',
+                    // xf_user: callback['data'][1].split(';')[0].split('=')[1],
+                    // date_expire: callback['data'][1].split(';')[1].split(',')[1].trim(),
+                    // xf_session: callback['data'][2].split(';')[0].split('=')[1],
                 });
             } else {
                 res.status(400).send({
