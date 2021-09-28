@@ -1,0 +1,25 @@
+{
+  "name": "vozloginverification",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "login voz with 2-steps verification",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haophan1996/vozloginVerification.git"
+  },
+  "author": "HP",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haophan1996/vozloginVerification/issues"
+  },
+  "homepage": "https://github.com/haophan1996/vozloginVerification#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "querystring": "^0.2.1",
+    "request": "^2.88.2"
+  }
+}
