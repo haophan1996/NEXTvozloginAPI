@@ -53,7 +53,7 @@ async function getVerification(bodyUser, callback) {
     let form = {
         code: bodyUser['code'],
         confirm: '1',
-        trust: bodyUser['trust'],
+        trust: 1,
         provider: bodyUser['provider'],
         remember: '1',
         _xfToken: bodyUser['_xfToken'],
