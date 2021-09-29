@@ -20,9 +20,7 @@ api.post('/api/login', async (req, res) => {
             if (bodyReturn.length == 2) {
                 res.status(200).send({
                     type: 0,
-                    xf_user: bodyReturn[0].split(';')[0].split('=')[1],
-                    date_expire: bodyReturn[0].split(';')[1].split(',')[1].trim(),
-                    xf_session: bodyReturn[1].split(';')[0].split('=')[1]
+                    cookie: bodyReturn[0].split(';')[0].split('=')[1] + '; ' + bodyReturn[1].split(';')[0].split('=')[1] + ';', 
                 });
             } else if (bodyReturn.length == 1) {
                 res.status(200).send({

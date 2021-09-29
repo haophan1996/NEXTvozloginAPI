@@ -49,7 +49,7 @@ api2.post('/api/verification', async (req, res) => {
 
  
 async function getVerification(bodyUser, callback) {
-
+    console.log(bodyUser);
     let form = {
         code: bodyUser['code'],
         confirm: '1',
@@ -87,9 +87,7 @@ async function getVerification(bodyUser, callback) {
                     'status': 'errorGe',
                     'errors': parseBody['errors'][0]
                 });
-            } else {
-                console.log(res);
-                console.log(res.headers['set-cookie']);
+            } else { 
                 if (res.headers['set-cookie'] == null) {
                     callback({
                         'status': 'errorSecurity',
