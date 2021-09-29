@@ -87,6 +87,8 @@ async function getVerification(bodyUser, callback) {
                     'errors': parseBody['errors'][0]
                 });
             } else {
+                console.log(res);
+                console.log(res.headers['set-cookie']);
                 if (res.headers['set-cookie'] == null) {
                     callback({
                         'status': 'errorSecurity',
