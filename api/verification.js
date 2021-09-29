@@ -47,20 +47,17 @@ api2.post('/api/verification', async (req, res) => {
 });
 
 
-
+ 
 async function getVerification(bodyUser, callback) {
 
     let form = {
         code: bodyUser['code'],
         confirm: '1',
-        //trust: bodyUser['trust'],
+        trust: bodyUser['trust'],
         provider: bodyUser['provider'],
         remember: '1',
         _xfToken: bodyUser['_xfToken'],
         _xfResponseType: 'json',
-        _xfRedirect : 'https://voz.vn/',
-        _xfWithData : '1',
-        _xfRequestUri : '/login/two-step?_xfRedirect=https://voz.vn/&remember=1'
     }
 
     let formData = stringify(form);
@@ -71,8 +68,7 @@ async function getVerification(bodyUser, callback) {
             'Content-Length': contentLength,
             'Content-Type': 'application/x-www-form-urlencoded',
             'Cookie': bodyUser['xf_session'] + '; ' + bodyUser['xf_csrf'] + ';',
-            'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36',
-            'x-requested-with' : 'XMLHttpRequest',
+            'User-agent': bodyUser['userAgent'],
             'Host': 'voz.vn',
         },
         uri: 'https://voz.vn/login/two-step',
@@ -112,68 +108,3 @@ async function getVerification(bodyUser, callback) {
     });
 
 }
-
-
-
-
-
-// async function getVerification(bodyUser, callback) {
-
-//     let form = {
-//         code: bodyUser['code'],
-//         confirm: '1',
-//         //trust: bodyUser['trust'],
-//         provider: bodyUser['provider'],
-//         remember: '1',
-//         _xfToken: bodyUser['_xfToken'],
-//         _xfResponseType: 'json',
-//     }
-
-//     let formData = stringify(form);
-//     let contentLength = formData.length;
-
-//     await request({
-//         headers: {
-//             'Content-Length': contentLength,
-//             'Content-Type': 'application/x-www-form-urlencoded',
-//             'Cookie': bodyUser['xf_session'] + '; ' + bodyUser['xf_csrf'] + ';',
-//             'User-agent': bodyUser['userAgent'],
-//             'Host': 'voz.vn',
-//         },
-//         uri: 'https://voz.vn/login/two-step',
-//         body: formData,
-//         method: 'POST'
-//     }, async function (error, res, body) {
-//         if (res.statusCode != 200 && res.statusCode != 303) {
-//             callback({
-//                 'status': 'errorSV',
-//                 'errors': 'Cannot connect to voz.vn'
-//             });
-//         } else {
-//             let parseBody = JSON.parse(body);
-//             if (parseBody['status'] == 'error') {
-//                 callback({
-//                     'status': 'errorGe',
-//                     'errors': parseBody['errors'][0]
-//                 });
-//             } else {
-//                 console.log(res);
-//                 console.log(res.headers['set-cookie']);
-//                 if (res.headers['set-cookie'] == null) {
-//                     callback({
-//                         'status': 'errorSecurity',
-//                         'errors': 'Refresh page to log or Kill and open again'
-//                     });
-//                 } else {
-//                     callback({
-//                         'status': 'ok',
-//                         'data': res.headers['set-cookie']
-//                     });
-//                 }
-
-//             }
-//         }
-
-//     });
-
-// }
