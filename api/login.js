@@ -10,27 +10,32 @@ api.post('/api/login', async (req, res) => {
     await getCookieLogin(req.body, function (bodyReturn) {
         if (bodyReturn == 'errorServer') {
             res.status(400).send({
-                xf_user: 'Cannot connect to server voz.vn'
+                status : 'errors',
+                errors: 'Cannot connect to server voz.vn'
             });
         } else if (bodyReturn == 'errorLogin') {
             res.status(400).send({
-                xf_user: 'Incorrect password / or id'
+                status : 'errors',
+                errors: 'Incorrect password / or id'
             });
         } else {
             if (bodyReturn.length == 2) {
                 res.status(200).send({
+                    status : 'ok',
                     type: 0,
                     cookie: bodyReturn[0].split(';')[0] + '; ' + bodyReturn[1].split(';')[0] + ';', 
                 });
             } else if (bodyReturn.length == 1) {
                 res.status(200).send({
+                    status : 'ok',
                     type: 1,
                     xf_session: bodyReturn[0].split(';')[0],
                     checkData: bodyReturn[0],
                 });
             } else {
                 res.status(400).send({
-                    xf_user: 'Cant find cookie'
+                    status : 'errors',
+                    errors: 'Cant find cookie'
                 });
             }
         }
