@@ -32,15 +32,15 @@ api2.post('/api/verification', async (req, res) => {
         }
         else if (callback['status'] == 'errorGe') {
             res.status(400).send({
-                xf_user: callback['errors']
+                errors: callback['errors']
             });
         } else if (callback['status'] == 'errorSV') {
             res.status(400).send({
-                xf_user: callback['errors']
+                errors: callback['errors']
             });
         } else {
             res.status(400).send({
-                xf_user: callback['errors']
+                errors: callback['errors']
             });
         }
     });
